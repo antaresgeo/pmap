@@ -1,0 +1,6 @@
+{
+  "name": "pmap",
+  "short_name": "pmap",
+  "start_url": "/",
+  "display": "standalone"
+}
