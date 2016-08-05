@@ -28,7 +28,7 @@
                 height: 100%;
             }
         </style>
-        <iron-ajax id="ajax" auto url="../../res.json" handle-as="json" on-response="_handleResponse"></iron-ajax>
+        <iron-ajax id="ajax" auto url="{{url}}" handle-as="json" on-response="_handleResponse"></iron-ajax>
         <paper-drawer-panel>
             <paper-header-panel drawer>
                 <paper-toolbar class="medium-tall">
@@ -68,6 +68,10 @@
             is: 'pmap-app',
 
             properties: {
+                url: {
+                  type: String,
+                  value: '../../res.json'
+                }
                 name: {
                     type: String,
                     observer: '_nameChange'
