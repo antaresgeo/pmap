@@ -51,8 +51,8 @@
                 <main>
                     <google-map id="map" map="{{map}}" latitude="10.3951135" longitude="-75.4542665" zoom="13" api-key="AIzaSyDUjaF40OncczF7dt6wt0GNVTGxB7a_Elg">
                         <template is="dom-repeat" items="{{markers}}">
-                            <google-map-marker mid="mk_{{item._id}}" latitude="{{item.lat}}" longitude="{{item.lng}}" animation="DROP">
-                                <h4 id="k{{index}}">{{item.name}}</h4>
+                            <google-map-marker mid="mk_{{item._id}}" latitude="{{item.lat}}" longitude="{{item.lng}}" animation="DROP" click-events="true" on-google-map-marker-click="markerClicked">
+                                <h4>{{item.name}}</h4>
                                 <img src="{{item.foto}}">
                             </google-map-marker>
                         </template>
@@ -110,8 +110,19 @@
                         this.$.map.markers[key].animation = "BOUNCE";
                         map.setCenter(pos);
                         map.setZoom(16);
+                        window._m = this.$.map.markers[key];
                     } else {
+                        this.$.map.markers[key].open = false;
                         this.$.map.markers[key].animation = "";
+                    }
+                }
+            },
+
+            markerClicked: function(e) {
+                var m = this.$.map;
+                for(let key in m.markers){
+                    if( m.markers[key].open && m.markers[key].marker !== e.target.marker){
+                        this.$.map.markers[key].open = false;
                     }
                 }
             }
